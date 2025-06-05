@@ -1,10 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cwiczenia12.Models;
-
+[Table("Trip")]
+[PrimaryKey(nameof(IdTrip))]
 public class Trip
 {
-    [Key]
+    
     private int IdTrip { get; set; }
     [MaxLength(120)]
     private string Name { get; set; }

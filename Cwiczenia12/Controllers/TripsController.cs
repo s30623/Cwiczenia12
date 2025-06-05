@@ -15,6 +15,7 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet]
+    [Route("trips")]
     public async Task<IActionResult> GetTrips()
     {
         var trips = await _tripsService.GetTrips();
