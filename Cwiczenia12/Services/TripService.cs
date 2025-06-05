@@ -1,12 +1,21 @@
-﻿using Cwiczenia12.Models;
+﻿using Cwiczenia12.Data;
+using Cwiczenia12.DTOs;
+using Cwiczenia12.Models;
 
 namespace Cwiczenia12.Services;
 
 public class TripService : ITripService
 {
-    public async Task<List<Trip>> GetTrips()
+    private readonly DatabaseContext _context;
+
+    public TripService(DatabaseContext context)
     {
-        var trips = new List<Trip>();
-        return trips;
+        _context = context;
+    }
+
+    public async Task<TripResultDTO> GetTrips()
+    {
+        var temp = new TripResultDTO();
+        return temp;
     }
 }
