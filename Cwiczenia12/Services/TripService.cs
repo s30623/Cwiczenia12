@@ -56,4 +56,24 @@ public class TripService : ITripService
         }
         return false;
     }
+
+    public async Task<bool> tripExists(int tripId)
+    {
+        return await _context.Trip.AnyAsync(e => e.IdTrip == tripId);
+    }
+
+    public async Task<bool> checkClientExists(AddClientDTO client)
+    {
+        return await _context.Clients.AnyAsync(e => e.Pesel == client.Pesel); 
+    }
+
+    public async Task<bool> clientRegisteredToTrip(AddClientDTO client, int tripId)
+    {
+        var IdClient = await _context.Clients.FirstOrDefaultAsync(e => e.Pesel == client.Pesel);
+        if (IdClient != null)
+        {
+            return await _context.Clients_Trip.AnyAsync(e => e.IdTrip == tripId && e.IdClient == IdClient.IdClient);
+        }
+        return false;
+    }
 }

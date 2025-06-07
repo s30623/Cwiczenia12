@@ -32,13 +32,27 @@ public class TripsController : ControllerBase
             return BadRequest("Klient posiada przypisane wycieczki");
         }
         await _tripsService.deleteClient(clientId);
-        return Ok();
+        return Ok($"Usunieto klienta {clientId}");
     }
 
     [HttpPost]
     [Route("api/trips/{idTrip}/clients")]
-    public async Task<IActionResult> AddClient(int idTrip, ClientDTO client)
+    public async Task<IActionResult> AddClient(int idTrip, AddClientDTO client)
     {
+        if (await _tripsService.checkClientExists(client))
+        {
+            return BadRequest("Klient istnieje");
+        }
+
+        if (await _tripsService.clientRegisteredToTrip(client,idTrip))
+        {
+            return BadRequest($"Klient o nr pesel: {client.Pesel} jest juz przypisany do wycieczki");
+        }
+
+        if (await _tripsService.tripExists(idTrip))
+        {
+            return BadRequest("Wycieczka nie istnieje");
+        }
         return Ok();
     }
 }
