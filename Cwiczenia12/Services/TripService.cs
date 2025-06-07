@@ -40,4 +40,20 @@ public class TripService : ITripService
         };
         return temp;
     }
+
+    public async Task<bool> checkClientNoTrips(int clientId)
+    {
+        return await _context.Clients_Trip.Where(p => p.IdClient == clientId).AnyAsync();
+    }
+
+    public async Task<bool> deleteClient(int clientId)
+    {
+        var client = await _context.Clients_Trip.Where(p => p.IdClient == clientId).FirstOrDefaultAsync();
+        if (client != null)
+        {
+            _context.Clients_Trip.Remove(client);
+            return await _context.SaveChangesAsync() > 0;
+        }
+        return false;
+    }
 }

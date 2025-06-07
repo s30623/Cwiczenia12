@@ -27,6 +27,11 @@ public class TripsController : ControllerBase
     [Route("api/clients/{clientId}")]
     public async Task<IActionResult> DeleteClient(int clientId)
     {
+        if (await _tripsService.checkClientNoTrips(clientId))
+        {
+            return BadRequest("Klient posiada przypisane wycieczki");
+        }
+        await _tripsService.deleteClient(clientId);
         return Ok();
     }
 
