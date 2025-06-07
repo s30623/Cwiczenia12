@@ -53,7 +53,7 @@ public class TripsController : ControllerBase
         {
             return BadRequest("Wycieczka nie istnieje");
         }
-        await _tripsService.addClientToTrip(idTrip, client);
+        await _tripsService.addClientToTrip(client,idTrip);
         return Ok("Dodano klienta");
     }
 }
