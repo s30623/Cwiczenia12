@@ -11,4 +11,5 @@ public interface ITripService
     Task<bool> tripExists(int tripId);
     Task<bool> checkClientExists(AddClientDTO client);
     Task<bool> clientRegisteredToTrip(AddClientDTO client, int tripId);
+    Task<bool> addClientToTrip(AddClientDTO client, int tripId);
 }

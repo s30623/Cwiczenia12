@@ -76,4 +76,24 @@ public class TripService : ITripService
         }
         return false;
     }
+
+    public async Task<bool> addClientToTrip(AddClientDTO client, int tripId)
+    {
+        var max_index = await _context.Clients.OrderByDescending(e => e.IdClient).FirstOrDefaultAsync();
+        if (max_index == null)
+        {
+            max_index.IdClient = 0;
+        }
+        var _client = new Client
+        {
+            Email = client.Email,
+            FirstName = client.FirstName,
+            LastName = client.LastName,
+            Pesel = client.Pesel,
+            IdClient = max_index.IdClient,
+            Telephone = client.Telephone,
+        };
+        await _context.Clients.AddAsync(_client);
+        return await _context.SaveChangesAsync() > 0;
+    }
 }
