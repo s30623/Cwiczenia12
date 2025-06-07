@@ -9,7 +9,7 @@ namespace Cwiczenia12.Models;
 public class Country
 {
     
-    private int IdCountry { get; set; }
+    public int IdCountry { get; set; }
     [MaxLength(120)]
-    private string Name { get; set; }
+    public string Name { get; set; }
 }

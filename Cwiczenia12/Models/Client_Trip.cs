@@ -8,9 +8,9 @@ namespace Cwiczenia12.Models;
 public class Client_Trip
 {
     [ForeignKey(nameof(Client))]
-    private int IdClient { get; set; }
+    public int IdClient { get; set; }
     [ForeignKey(nameof(Trip))]
-    private int IdTrip { get; set; }
-    private int RegisteredAt { get; set; }
-    private int? PaymentDate { get; set; }
+    public int IdTrip { get; set; }
+    public int RegisteredAt { get; set; }
+    public int? PaymentDate { get; set; }
 }

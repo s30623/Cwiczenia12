@@ -1,9 +1,10 @@
-﻿using Cwiczenia12.Services;
+﻿using Cwiczenia12.DTOs;
+using Cwiczenia12.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cwiczenia12.Controllers;
 
-[Route("api/[controller]")]
+
 [ApiController]
 public class TripsController : ControllerBase
 {
@@ -15,10 +16,24 @@ public class TripsController : ControllerBase
     }
 
     [HttpGet]
-    [Route("trips")]
+    [Route("api/trips")]
     public async Task<IActionResult> GetTrips()
     {
         var trips = await _tripsService.GetTrips();
         return Ok(trips);
+    }
+
+    [HttpDelete]
+    [Route("api/clients/{clientId}")]
+    public async Task<IActionResult> DeleteClient(int clientId)
+    {
+        return Ok();
+    }
+
+    [HttpPost]
+    [Route("api/trips/{idTrip}/clients")]
+    public async Task<IActionResult> AddClient(int idTrip, ClientDTO client)
+    {
+        return Ok();
     }
 }

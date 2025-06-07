@@ -8,18 +8,18 @@ namespace Cwiczenia12.Models;
 [PrimaryKey(nameof(IdClient))]
 public class Client
 {
-    private int IdClient { get; set; }
+    public int IdClient { get; set; }
     
     [MaxLength(120)]
-    private string FirstName { get; set; }
+    public string FirstName { get; set; }
     
     [MaxLength(120)]
-    private string LastName { get; set; }
+    public string LastName { get; set; }
     [MaxLength(120)]
-    private string Email { get; set; }
+    public string Email { get; set; }
     [MaxLength(120)]
-    private string Telephone { get; set; }
+    public string Telephone { get; set; }
     [MaxLength(120)]
-    private string Pesel { get; set; }
+    public string Pesel { get; set; }
     
 }

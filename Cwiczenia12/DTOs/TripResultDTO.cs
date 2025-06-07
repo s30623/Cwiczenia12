@@ -7,6 +7,6 @@ public class TripResultDTO
     public int pageNum {get; set;}
     public int pageSize {get; set;}
     public int allPages {get; set;}
-    public List<Trip> trips {get; set;}
-    public List<Client> Clients {get; set;}
+    public List<TripDTO> trips {get; set;}
+    public List<ClientDTO> Clients {get; set;}
 }

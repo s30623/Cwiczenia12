@@ -8,7 +8,7 @@ namespace Cwiczenia12.Models;
 public class Country_Trip
 {
     [ForeignKey(nameof(Country))]
-    private int IdCountry { get; set; }
+    public int IdCountry { get; set; }
     [ForeignKey(nameof(Trip))]
-    private int IdTrip { get; set; }
+    public int IdTrip { get; set; }
 }
