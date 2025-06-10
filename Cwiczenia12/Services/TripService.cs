@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cwiczenia12.Services;
 
-public class TripService : ITripService
+public class TripService 
 {
-    private readonly DatabaseContext _context;
+    private readonly MasterContext _context;
 
-    public TripService(DatabaseContext context)
+    public TripService(MasterContext context)
     {
         _context = context;
     }
@@ -25,14 +25,14 @@ public class TripService : ITripService
                 FirstName = e.FirstName,
                 LastName = e.LastName
             }).ToList()),
-            trips = new List<TripDTO>(_context.Trip.Select(e => new TripDTO
+            trips = new List<TripDTO>(_context.Trips.Select(e => new TripDTO
             {
                 name = e.Name,
                 description = e.Description,
                 DateFrom = e.DateFrom,
                 DateTo = e.DateTo,
                 MaxPeople = e.MaxPeople,
-                Countries = new List<CountryDTO>(_context.Trip.Select(e => new CountryDTO
+                Countries = new List<CountryDTO>(_context.Trips.Select(e => new CountryDTO
                 {
                     Name = e.Name
                 }).ToList())
@@ -43,15 +43,15 @@ public class TripService : ITripService
 
     public async Task<bool> checkClientNoTrips(int clientId)
     {
-        return await _context.Clients_Trip.Where(p => p.IdClient == clientId).AnyAsync();
+        return await _context.ClientTrips.Where(p => p.IdClient == clientId).AnyAsync();
     }
 
     public async Task<bool> deleteClient(int clientId)
     {
-        var client = await _context.Clients_Trip.Where(p => p.IdClient == clientId).FirstOrDefaultAsync();
+        var client = await _context.ClientTrips.Where(p => p.IdClient == clientId).FirstOrDefaultAsync();
         if (client != null)
         {
-            _context.Clients_Trip.Remove(client);
+            _context.ClientTrips.Remove(client);
             return await _context.SaveChangesAsync() > 0;
         }
         return false;
@@ -59,7 +59,7 @@ public class TripService : ITripService
 
     public async Task<bool> tripExists(int tripId)
     {
-        return await _context.Trip.AnyAsync(e => e.IdTrip == tripId);
+        return await _context.Trips.AnyAsync(e => e.IdTrip == tripId);
     }
 
     public async Task<bool> checkClientExists(AddClientDTO client)
@@ -72,7 +72,7 @@ public class TripService : ITripService
         var IdClient = await _context.Clients.FirstOrDefaultAsync(e => e.Pesel == client.Pesel);
         if (IdClient != null)
         {
-            return await _context.Clients_Trip.AnyAsync(e => e.IdTrip == tripId && e.IdClient == IdClient.IdClient);
+            return await _context.ClientTrips.AnyAsync(e => e.IdTrip == tripId && e.IdClient == IdClient.IdClient);
         }
         return false;
     }

@@ -16,7 +16,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 
 // Wstrzykiwanie zależności
 // https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection
-builder.Services.AddScoped<ITripService, TripService>();
+builder.Services.AddScoped<ITripService>();
 
 var app = builder.Build();
 

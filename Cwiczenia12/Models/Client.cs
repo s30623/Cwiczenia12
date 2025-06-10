@@ -1,25 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Cwiczenia12.Models;
 
-[Table("Client")]
-[PrimaryKey(nameof(IdClient))]
-public class Client
+public partial class Client
 {
     public int IdClient { get; set; }
-    
-    [MaxLength(120)]
-    public string FirstName { get; set; }
-    
-    [MaxLength(120)]
-    public string LastName { get; set; }
-    [MaxLength(120)]
-    public string Email { get; set; }
-    [MaxLength(120)]
-    public string Telephone { get; set; }
-    [MaxLength(120)]
-    public string Pesel { get; set; }
-    
+
+    public string FirstName { get; set; } = null!;
+
+    public string LastName { get; set; } = null!;
+
+    public string Email { get; set; } = null!;
+
+    public string Telephone { get; set; } = null!;
+
+    public string Pesel { get; set; } = null!;
+
+    public virtual ICollection<ClientTrip> ClientTrips { get; set; } = new List<ClientTrip>();
 }
