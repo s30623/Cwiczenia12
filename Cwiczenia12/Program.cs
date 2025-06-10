@@ -10,13 +10,13 @@ builder.Services.AddControllers();
 
 // Konfiguracja kontekstu bazy danych
 // ConnectionString jest pobierany z appsettings.json, oczywiście należy go tam też ustawić
-builder.Services.AddDbContext<DatabaseContext>(options => 
+builder.Services.AddDbContext<MasterContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"))
 );
 
 // Wstrzykiwanie zależności
 // https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection
-builder.Services.AddScoped<ITripService>();
+builder.Services.AddScoped<ITripService, TripService>();
 
 var app = builder.Build();
 

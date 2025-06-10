@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cwiczenia12.Services;
 
-public class TripService 
+public class TripService : ITripService
 {
     private readonly MasterContext _context;
 
